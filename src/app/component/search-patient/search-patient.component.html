@@ -1,0 +1,53 @@
+<div class="row">
+
+    <div class="col-md-12"> 
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Patient search</h3>
+                <h6 class="card-subtitle">Type in the full name of the patient</h6>
+                    <div class="form-group" [class.has-danger]="searchFailed">
+                      <label for="typeahead-http">Search for a patient:</label>
+                      <input id="typeahead-http" type="text" class="form-control" [(ngModel)]="model2" [ngbTypeahead]="search2" placeholder="Patient search" />
+                      <span *ngIf="searching">searching...</span>
+                      <div class="form-control-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div> 
+                    </div>
+
+                    <hr>
+                    <pre>Number of Patients Found : 2</pre>
+  			</div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Search Result</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Reason</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Herman Beck</td>
+                            <td>22</td>
+                            <td>
+                                        <input class="form-control" type="text" placeholder="Type Reason">
+                            </td>
+                            <td> <button type="button" class="btn btn-success">Send </button></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

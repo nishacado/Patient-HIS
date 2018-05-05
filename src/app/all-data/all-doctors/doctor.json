@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Ethel Price",
+        "gender": "female",
+        "hospital": "Hospital 1",
+        "age": 22
+    },
+    {
+        "name": "Claudine Neal",
+        "gender": "female",
+        "hospital": "Hospital 2",
+        "age": 55
+    },
+    {
+        "name": "Beryl Rice",
+        "gender": "female",
+        "hospital":"Hospital 3",
+        "age": 67
+    },
+    {
+        "name": "Wilder Gonzales",
+        "gender": "male",
+        "hospital": "Hospital 1",
+        "age": 25
+    },
+    {
+        "name": "Georgina Schultz",
+        "gender": "female",
+        "hospital": "Hospital 4",
+        "age": 26
+    },
+    {
+        "name": "Carroll Buchanan",
+        "gender": "male",
+        "hospital": "Hospital 5",
+        "age": 49
+    }
+]
