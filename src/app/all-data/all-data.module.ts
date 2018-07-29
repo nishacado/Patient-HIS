@@ -7,6 +7,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { TablesRoutes } from './all-data.routing';
 import { AllDoctors } from './all-doctors/all-doctors.component';
 import { AllPatients } from './all-patients/all-patients.component';
+import { DataProvider } from '../../provider/data';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { AllPatients } from './all-patients/all-patients.component';
   declarations: [
     AllDoctors,
     AllPatients,
-  ]
+  ],
+  providers:[DataProvider]
 })
 
 export class TablesModule {}

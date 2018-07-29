@@ -8,6 +8,8 @@ import { SamplePagesRoutes } from './user.routing';
 import { ProfileComponent } from './profile/profile.component';
 import { PatientRecord } from './patient-record/patient-record.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DataProvider } from '../../provider/data';
+
 
 @NgModule({
   imports: [
@@ -20,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     ProfileComponent,
     PatientRecord
-  ]
+  ],
+  providers:[DataProvider]
 })
 
 export class SamplePagesModule {}

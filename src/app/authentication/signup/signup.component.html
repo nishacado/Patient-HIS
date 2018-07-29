@@ -1,55 +1,56 @@
 <div class="login-register" style="background-image:url(assets/images/background/login-register.jpg);">
   <div class="login-box card">
     <div class="card-body">
-      <form class="form-horizontal form-material" id="loginform">
+      <form class="form-horizontal form-material"  id ="signupform">
         <h3 class="box-title m-b-20">Sign Up</h3>
-        <div class="form-group">
+        <!--Fields to add : Name, Country(Should be select with all countries), Contact Number, Role, Confirm Password (For Validation refer AAF Proj)-->
+      <div class="form-group">
           <div class="col-xs-12">
-            <input class="form-control" required="" type="text" placeholder="Name">
+            <input class="form-control"  type="text" placeholder="Name" name="name" required [(ngModel)]="name" >
           </div>
         </div>
         <div class="form-group ">
           <div class="col-xs-12">
-            <input class="form-control" required="" type="email" placeholder="Email">
+            <input class="form-control"type="email" placeholder="Email" name="email" required [(ngModel)]="email">
           </div>
         </div>
-        <div class="form-group">  
+     <div class="form-group">  
           <div class="col-xs-12">
-              <select class="custom-select" id="inlineFormCustomSelect">
-                  <option selected="">Choose Role...</option>
-                  <option value="2">Doctor</option>
-                  <option value="3">Patient</option>
+              <select class="custom-select" id="inlineFormCustomSelect" name="role" [(ngModel)]="role" >
+                  <option selected value="" disabled>Choose Role...</option>
+                  <option value="Doctor">Doctor</option>
+                  <option value="Patient">Patient</option>
               </select>
           </div>
       </div>
         <div class="form-group ">
           <div class="col-xs-12">
-            <input class="form-control" required="" type="password" placeholder="Password">
+            <input class="form-control" type="password" placeholder="Password" name="password" required [(ngModel)]="password">
           </div>
         </div>
-        <div class="form-group">
+      <div class="form-group">
           <div class="col-xs-12">
-            <input class="form-control" required="" type="password" placeholder="Confirm Password">
+            <input class="form-control" type="password" placeholder="Confirm Password" name="confirm" required [(ngModel)]="confirm" >
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-12">
             <div class="checkbox checkbox-success p-t-0">
-              <input id="checkbox-signup" type="checkbox" required="" class="filled-in chk-col-light-blue">
-              <label for="checkbox-signup"> I agree to all <a href="javascript:void(0)">Terms</a></label>
+              <input id="checkbox-signup" type="checkbox"  class="filled-in chk-col-light-blue">
+              <label for="checkbox-signup"> I agree to all <a href="javascript:void(0)">Terms and Conditions</a></label>
             </div>
           </div>
         </div>
         <div class="form-group text-center p-b-20">
           <div class="col-xs-12">
-            <a [routerLink]="['/authentication/login']" class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light">Sign Up</a>
-          </div>
+           <button  class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" style="color:#fff;" [disabled]="!name || !email || !password || !role" (click)="signup()">Sign Up</button>
+        </div>
         </div>
         <div class="form-group m-b-0">
           <div class="col-sm-12 text-center">
             Already have an account? <a class="text-info m-l-5" [routerLink]="['/authentication/login']"><b>Sign In</b></a>
+            </div>
           </div>
-        </div>
       </form>
     </div>
   </div>

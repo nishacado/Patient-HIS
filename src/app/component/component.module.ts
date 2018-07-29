@@ -15,6 +15,9 @@ import { NgbdModalBasic } from './modal/modal.component';
 import { SearchPatient } from './search-patient/search-patient.component';
 import { DataAccess } from './data-access/data-access.component';
 
+/**/import { NgbdDropdownBasic } from './country/country.component';
+import { DataProvider } from '../../provider/data';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -31,8 +34,10 @@ import { DataAccess } from './data-access/data-access.component';
     MyRequests,
     NgbdModalBasic,
     SearchPatient,
-    DataAccess
-  ]
+    DataAccess,
+	NgbdDropdownBasic
+  ],
+  providers:[DataProvider]
 })
 
 export class ComponentsModule { }

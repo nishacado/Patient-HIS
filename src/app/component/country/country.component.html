@@ -1,0 +1,53 @@
+<div class="col-12">
+  <div class="card">
+      <div class="card-body">
+          <h4 class="card-title">Countries</h4>
+          <h6 class="card-subtitle">List of all Countries on the system    </h6>
+          <div class="card-body">
+              <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" *ngIf="!key">Add New Country</h4>
+          <h4 class="modal-title" *ngIf="key">Edit Country</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form">
+              <div class="form-group m-t-40 row">
+                  <label for="example-text-input" class="col-4 col-form-label">Country Name</label>
+                  <div class="col-8">
+                      <input class="form-control" type="text" placeholder="Enter Country Name" name="name"  [(ngModel)]="name">
+                  </div>
+              </div>
+              <button type="submit" *ngIf="!key" class="btn btn-success waves-effect waves-light m-r-10" (click)="addcountry()">Submit</button>
+              <button type="submit" *ngIf="key" class="btn btn-success waves-effect waves-light m-r-10" (click)="updatecountry()">Update</button>
+          </form>
+        </div>
+      </ng-template>
+
+          </div>
+          <button class="btn btn-outline-secondary" (click)="open2(content)" style="position:absolute;right:50%;top:7%;">Add New Country</button>   
+          <div class="table-responsive">
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr  *ngFor="let i of countrylist">
+                          <td>{{i.country}}</td>
+                          <td>
+                              <button type="button" class="btn btn-warning btn-circle" (click)="edit(i.$key)" ><i class="fa fa-pencil"></i> </button>
+                              <button type="button" class="btn btn-danger btn-circle" (click)="delete(i.$key)" ><i class="fa fa-times"></i> </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+
+      </div>
+  </div>
+</div>>

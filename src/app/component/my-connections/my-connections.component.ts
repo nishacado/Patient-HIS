@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
+import { DataProvider } from '../../../provider/data';
 
 @Component({
 	selector: 'ngbd-pagination',
@@ -15,5 +16,14 @@ export class MyConnections{
 
   toggleDisabled() {
     this.isDisabled = !this.isDisabled;
-  }
+	}
+	curuserdetails: any;
+	constructor(public data:DataProvider){
+
+
+		this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
+				this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
+		  });
+
+	}
 }

@@ -42,6 +42,9 @@ export const ROUTES: RouteInfo[] = [
         path: '', title: 'Auth', icon: '', class: 'nav-small-cap', label: '', labelClass: '', extralink: true, submenu: []
     },
     {
+        path: '/component/country', title: 'Country', icon: 'mdi mdi-bell', class: '', label: '', labelClass: '', extralink: false, submenu: []
+    },
+    {
         path: '/404', title: 'LogOut', icon: 'mdi mdi-bell', class: '', label: '', labelClass: '', extralink: false, submenu: []
     }
 ];

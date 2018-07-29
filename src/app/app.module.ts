@@ -21,6 +21,15 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './shared/spinner.component';
+//Firebase Connection
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+
+
+// for provider
+import { AngularFireDatabaseModule } from '../../node_modules/angularfire2/database';
+import { LoginProvider } from '../provider/login';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -46,16 +55,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpModule,
     NgbModule.forRoot(),
     PerfectScrollbarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    //AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    AngularFireDatabaseModule
   ],
-  providers: [
-      {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }, {
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+
+  providers: [LoginProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

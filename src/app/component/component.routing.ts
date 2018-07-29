@@ -8,6 +8,9 @@ import { NgbdModalBasic } from './modal/modal.component';
 import { SearchPatient } from './search-patient/search-patient.component';
 import { DataAccess } from './data-access/data-access.component';
 
+
+/**/import { NgbdDropdownBasic } from './country/country.component';
+
 export const ComponentsRoutes: Routes = [
   {
     path: '',
@@ -17,6 +20,14 @@ export const ComponentsRoutes: Routes = [
       component: AllDoctors,
       data: {
         title: 'Progressbar',
+        urls: [{title: 'Dashboard', url: '/dashboard'}, {title: 'ngComponent'}, {title: 'Progressbar'}]
+      }
+    },
+	{
+      path: 'country',
+      component: NgbdDropdownBasic,
+      data: {
+        title: 'country',
         urls: [{title: 'Dashboard', url: '/dashboard'}, {title: 'ngComponent'}, {title: 'Progressbar'}]
       }
     },

@@ -9,6 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import { DataProvider } from '../../../provider/data';
 
 
 const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
@@ -109,8 +110,14 @@ export class SearchPatient{
   model2: any;
   searching = false;
   searchFailed = false;
+  curuserdetails: any;
 
-  constructor(private _service: WikipediaService) {}
+  constructor(private _service: WikipediaService,public data:DataProvider) {
+    this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
+				this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
+		  });
+
+  }
 
   formatter = (result: string) => result.toUpperCase();
   
@@ -145,4 +152,5 @@ export class SearchPatient{
         : statesWithFlags.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
   formatter2 = (x: {name: string}) => x.name; 
+ 
 }

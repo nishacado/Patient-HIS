@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="col-lg-4">
+<div class="row"  *ngIf="curuserdetails">
+    <div class="col-lg-4"  *ngIf="curuserdetails.role !='Doctor' &&  curuserdetails.role !='Admin'"></div>
         <div class="card">
             <img class="card-img-top img-responsive" src="assets/images/big/img1.jpg" alt="Card image cap">
             <div class="card-body">
@@ -12,7 +12,6 @@
                 <button class="btn btn-success btn-rounded waves-effect waves-light m-t-20">Revoke Access</button>
             </div>
         </div>
-    </div>
     <div class="col-lg-4">
         <div class="card">
             <img class="card-img-top img-responsive" src="assets/images/big/img1.jpg" alt="Card image cap">

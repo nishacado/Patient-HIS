@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { DataProvider } from '../../../provider/data';
 
 
 declare var require: any;
@@ -14,7 +15,7 @@ export class AllPatients {
 
   editing = {};
   rows = [];
-  temp = [...data];
+ // temp = [...data];
   
   loadingIndicator: boolean = true;
   reorderable: boolean = true;                           
@@ -26,7 +27,17 @@ export class AllPatients {
   ];       
 
   @ViewChild(AllPatients) table: AllPatients;
-  constructor() {
+  curuserdetails: any;
+	constructor(public data:DataProvider){
+
+
+		this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
+				this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
+		  });
+
+	}
+  /*constructor() {
+     
       this.rows = data;
       this.temp = [...data];
       setTimeout(() => { this.loadingIndicator = false; }, 1500);                                   
@@ -53,5 +64,5 @@ export class AllPatients {
   this.rows[rowIndex][cell] = event.target.value;
   this.rows = [...this.rows];
   console.log('UPDATED!', this.rows[rowIndex][cell]);        
-}
+}*/
 }

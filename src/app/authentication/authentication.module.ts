@@ -10,19 +10,23 @@ import { SignupComponent } from './signup/signup.component';
 
 
 import { AuthenticationRoutes } from './authentication.routing';
-
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginProvider } from '../../provider/login';
+import * as $ from 'jquery'
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(AuthenticationRoutes)
+    RouterModule.forChild(AuthenticationRoutes),
+    FormsModule
+    
   ],
   declarations: [
     NotFoundComponent,
     LoginComponent,
     SignupComponent,
 
-  ]
+  ],
+  providers: [LoginProvider],
 })
 
 export class AuthenticationModule {}
