@@ -30,7 +30,7 @@ import { environment } from '../environments/environment';
 // for provider
 import { AngularFireDatabaseModule } from '../../node_modules/angularfire2/database';
 import { LoginProvider } from '../provider/login';
-
+import { DataProvider } from '../provider/data';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 2,
@@ -61,7 +61,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AngularFireDatabaseModule
   ],
 
-  providers: [LoginProvider],
+  providers: [LoginProvider,DataProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

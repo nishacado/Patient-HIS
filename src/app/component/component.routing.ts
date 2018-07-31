@@ -9,7 +9,7 @@ import { SearchPatient } from './search-patient/search-patient.component';
 import { DataAccess } from './data-access/data-access.component';
 
 
-/**/import { NgbdDropdownBasic } from './country/country.component';
+
 
 export const ComponentsRoutes: Routes = [
   {
@@ -23,14 +23,7 @@ export const ComponentsRoutes: Routes = [
         urls: [{title: 'Dashboard', url: '/dashboard'}, {title: 'ngComponent'}, {title: 'Progressbar'}]
       }
     },
-	{
-      path: 'country',
-      component: NgbdDropdownBasic,
-      data: {
-        title: 'country',
-        urls: [{title: 'Dashboard', url: '/dashboard'}, {title: 'ngComponent'}, {title: 'Progressbar'}]
-      }
-    },
+
     {
       path: 'my-connections',
       component:  MyConnections,

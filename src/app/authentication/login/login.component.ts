@@ -13,14 +13,14 @@ export class LoginComponent implements OnInit{
  constructor(public router: Router,public loginProvider: LoginProvider) {}
      email:any;
      password:any;
-     role:any;
+    
     ngOnInit() {}
 
 
 
    onLoggedin() {
         //localStorage.setItem('isLoggedin', 'true');
-        this.loginProvider.emailLogin(this.email,this.password,this.role);
+        this.loginProvider.emailLogin(this.email,this.password);
     }
 
 

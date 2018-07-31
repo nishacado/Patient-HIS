@@ -1,5 +1,5 @@
-<div class="row" *ngIf="curuserdetails.role !='Admin' &&  curuserdetails.role !='Patient'" >
-    <div class="col-12">
+<div class="row" *ngIf="curuserdetails" >
+    <div class="col-12" *ngIf="curuserdetails.role !='Admin' &&  curuserdetails.role !='Patient'" >
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Search Result</h4>
