@@ -15,7 +15,7 @@ import { NgbdModalBasic } from './modal/modal.component';
 import { SearchPatient } from './search-patient/search-patient.component';
 import { DataAccess } from './data-access/data-access.component';
 
-/**/import { NgbdDropdownBasic } from './country/country.component';
+
 import { DataProvider } from '../../provider/data';
 
 @NgModule({
@@ -35,7 +35,7 @@ import { DataProvider } from '../../provider/data';
     NgbdModalBasic,
     SearchPatient,
     DataAccess,
-	NgbdDropdownBasic
+
   ],
   providers:[DataProvider]
 })

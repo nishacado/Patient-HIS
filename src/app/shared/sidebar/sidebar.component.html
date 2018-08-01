@@ -9,8 +9,8 @@
         </div>
     </div>
     <!-- User profile text-->
-    <div class="profile-text">
-        <h5>User Name</h5>
+    <div class="profile-text" *ngIf="curuserdetails">
+        <h5>{{curuserdetails.name}}</h5>
         <!--<a ngbDropdownToggle ngbDropdown href="javascript:void(0)" class="u-dropdown"><i class="mdi mdi-settings"></i>
             <div class="dropdown-menu animated flipInY" ngbDropdownMenu>
                 <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>

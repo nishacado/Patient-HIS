@@ -20,7 +20,7 @@ export class LoginProvider {
   }
 
   // Login on Firebase given the email and password.
-  emailLogin(email, password,role) {
+  emailLogin(email, password) {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((success) => {
         console.log("login was successful");

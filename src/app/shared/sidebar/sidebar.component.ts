@@ -3,6 +3,7 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ROUTES } from './menu-items';
 import { RouteInfo } from "./sidebar.metadata";
 import { Router, ActivatedRoute } from "@angular/router";
+import { DataProvider } from '../../../provider/data';
 declare var $: any;
 @Component({
   selector: 'ap-sidebar',
@@ -11,7 +12,7 @@ declare var $: any;
 })
 export class SidebarComponent implements OnInit {
     
-    
+    curuserdetails;
     showMenu: string = '';
     showSubMenu: string = '';
     public sidebarnavItems: any[];
@@ -34,9 +35,13 @@ export class SidebarComponent implements OnInit {
     }
     
     constructor(private modalService: NgbModal, private router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,public data:DataProvider) {
+            this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
+                  this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
+                  });
+                   }      
         
-    } 
+
     // End open close
     ngOnInit() {
         this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
