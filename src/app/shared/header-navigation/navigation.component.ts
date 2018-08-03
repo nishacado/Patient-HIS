@@ -14,11 +14,17 @@ export class NavigationComponent implements AfterViewInit {
   	public config: PerfectScrollbarConfigInterface = {};
     constructor(private modalService: NgbModal,public data:DataProvider,private router:Router){
 
+      let user=firebase.auth().currentUser;
+      if(user){
+        this.data.getCurrentUser().snapshotChanges().subscribe((user) => {
+          this.curuserdetails = user.payload.val();
+        }); 
+      }else{
+        this.router.navigate(['/authentication/login']);
+      }
 
-      this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
-        this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
-        });
-         }
+
+        }
       
     ngAfterViewInit() {
         

@@ -2,6 +2,7 @@ import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ROUTES,PATIENTROUTE,DOCTORROUTE } from './menu-items';
 import { RouteInfo } from "./sidebar.metadata";
+import * as firebase from 'firebase';
 import { Router, ActivatedRoute } from "@angular/router";
 import { DataProvider } from '../../../provider/data';
 declare var $: any;
@@ -42,22 +43,24 @@ export class SidebarComponent implements OnInit {
 
     // End open close
     ngOnInit() {
-		            this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
-                  this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
-				  		if(this.curuserdetails.role=='Admin'){
-			this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
-		}else if(this.curuserdetails.role=='Patient'){
-			this.sidebarnavItems = PATIENTROUTE.filter(sidebarnavItem => sidebarnavItem);
-		}else if(this.curuserdetails.role=='Doctor'){
-			this.sidebarnavItems = DOCTORROUTE.filter(sidebarnavItem => sidebarnavItem);
-		}else{
-			this.router.navigate['/'];
-		}
-                  });
+        let user=firebase.auth().currentUser;
+        if(user){
+            this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
+                this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
+                        if(this.curuserdetails.role=='Admin'){
+          this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
+      }else if(this.curuserdetails.role=='Patient'){
+          this.sidebarnavItems = PATIENTROUTE.filter(sidebarnavItem => sidebarnavItem);
+      }else if(this.curuserdetails.role=='Doctor'){
+          this.sidebarnavItems = DOCTORROUTE.filter(sidebarnavItem => sidebarnavItem);
+      }else{
+          this.router.navigate['/'];
+      }
+                });
+        }else{
+          this.router.navigate(['/authentication/login']);
+        }
 
-        
-		
-		
         $(function () {
             $(".sidebartoggler").on('click', function() {
                 if ($("#main-wrapper").hasClass("mini-sidebar")) {

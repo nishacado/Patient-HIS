@@ -3,6 +3,8 @@ import {NgbPanelChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 import { LoginProvider } from '../../../provider/login';
 import { DataProvider } from '../../../provider/data';
 import Orm from 'bigchaindb-orm';
+import * as firebase from 'firebase';
+import { Router } from '../../../../node_modules/@angular/router';
 
 const bdbOrm = new Orm(
     "https://test.bigchaindb.com/api/v1/",
@@ -19,12 +21,17 @@ const aliceKeypair = new bdbOrm.driver.Ed25519Keypair();
 })
 export class PatientRecords {
 	curuserdetails: any;
-	constructor(public data:DataProvider){
+	constructor(public data:DataProvider,private router: Router){
 
 
-		this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
+		let user=firebase.auth().currentUser;
+		if(user){
+			this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
 				this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
 		  });
+		}else{
+		  this.router.navigate(['/authentication/login']);
+		}
 
 		this.tryaddingdata();
 		this.fetchdata();

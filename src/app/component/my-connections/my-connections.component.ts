@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 import { DataProvider } from '../../../provider/data';
+import * as firebase from 'firebase';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
 	selector: 'ngbd-pagination',
@@ -18,12 +20,17 @@ export class MyConnections{
     this.isDisabled = !this.isDisabled;
 	}
 	curuserdetails: any;
-	constructor(public data:DataProvider){
+	constructor(public data:DataProvider,private router: Router){
 
-
-		this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
+		let user=firebase.auth().currentUser;
+		if(user){
+			this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
 				this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
 		  });
+		}else{
+		  this.router.navigate(['/authentication/login']);
+		}
+
 
 	}
 }

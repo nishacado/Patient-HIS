@@ -27,12 +27,19 @@ export class ProfileComponent {
 
     @ViewChild('content') editModal: ElementRef;
     @ViewChild('content1') editModal1: ElementRef;
-  constructor(private modalService: NgbModal,public data:DataProvider){
+  constructor(private modalService: NgbModal,public data:DataProvider,private router: Router){
+
+    let user=firebase.auth().currentUser;
+    if(user){
+      this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
+        this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
+        });
+    }else{
+      this.router.navigate(['/authentication/login']);
+    }
 
 
-    this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
-			this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
-      });
+
        }
 
        updateprofile(){
