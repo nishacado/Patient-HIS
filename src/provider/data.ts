@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
+import { Router } from '../../node_modules/@angular/router';
 
 @Injectable()
 export class DataProvider {
-    constructor(public angularfire: AngularFireDatabase) {
+    constructor(public angularfire: AngularFireDatabase,private router: Router) {
         console.log("Initializing Data Provider");
       }
       getUsers() {
-        return this.angularfire.list('/accounts', ref => ref.orderByChild('name'));
+        return this.angularfire.list('/accounts');
       }
       getCurrentUser() {
-        return this.angularfire.object('/accounts/' + firebase.auth().currentUser.uid);
+        let user=firebase.auth().currentUser;
+        if(user){
+          return this.angularfire.object('/accounts/' + firebase.auth().currentUser.uid);
+        }else{
+          this.router.navigate(['/authentication/login']);
+        }
       }
       getCountries(){
         return this.angularfire.list('/country');

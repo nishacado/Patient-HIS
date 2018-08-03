@@ -16,6 +16,8 @@ export class ProfileComponent {
     public isCollapsed = false;
     key=false;
     curuserdetails;
+    name;
+
     phoneno;
     Address;
     currentuser; 
@@ -45,6 +47,7 @@ export class ProfileComponent {
        updateprofile(){
 
         firebase.database().ref('accounts/'+this.curuserdetails.key).update({
+          name:this.name,
           phoneno:this.phoneno,
           Address:this.Address,
 
@@ -85,6 +88,7 @@ export class ProfileComponent {
         this.open3(this.editModal1);
       }
       edit(){
+        this.name=this.curuserdetails.name;
         this.phoneno=this.curuserdetails.phoneno;
         this.Address=this.curuserdetails.Address;
         
