@@ -6,13 +6,11 @@
                 <h6 class="card-subtitle">Type in the full name of the patient</h6>
                     <div class="form-group" [class.has-danger]="searchFailed">
                       <label for="typeahead-http">Search for a patient:</label>
-                      <input id="typeahead-http" type="text" class="form-control" [(ngModel)]="model2" [ngbTypeahead]="search2" placeholder="Patient search" />
-                      <span *ngIf="searching">searching...</span>
-                      <div class="form-control-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div> 
+                      <input id="typeahead-http" type="text" class="form-control" [(ngModel)]="patname" placeholder="Patient search" (ngModelChange)="search()"/>
                     </div>
 
                     <hr>
-                    <pre>Number of Patients Found : 2</pre>
+                    <pre>Number of Patients Found : {{filteredusers.length}}</pre>
   			</div>
         </div>
     
@@ -28,19 +26,19 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Age</th>
+                            <th>Address</th>
                             <th>Reason</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Herman Beck</td>
-                            <td>22</td>
+                        <tr  *ngFor="let i of filteredusers;let j = index">
+                            <td>{{i.name}}</td>
+                            <td>{{i.Address}}</td>
                             <td>
-                                        <input class="form-control" type="text" placeholder="Type Reason">
+                                <input class="form-control" type="text" [(ngModel)]="reason[j]" placeholder="Type Reason">
                             </td>
-                            <td> <button type="button" class="btn btn-success">Send </button></td>
+                            <td> <button type="button" class="btn btn-success" [disabled]="!reason[j]" (click)="senreq(i.$key,j)">Send </button></td>
                         </tr>
 
                     </tbody>

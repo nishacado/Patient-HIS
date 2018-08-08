@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-
-import { AllDoctors } from './all-doctors/all-doctors.component';
 import {  MyConnections } from './my-connections/my-connections.component';
 import { PatientRecords } from './my-records/my-records.component';
 import { MyRequests } from './my-requests/my-requests.component';
@@ -15,15 +13,6 @@ export const ComponentsRoutes: Routes = [
   {
     path: '',
     children: [
-    {
-      path: 'progressbar',
-      component: AllDoctors,
-      data: {
-        title: 'Progressbar',
-        urls: [{title: 'Dashboard', url: '/dashboard'}, {title: 'ngComponent'}, {title: 'Progressbar'}]
-      }
-    },
-
     {
       path: 'my-connections',
       component:  MyConnections,

@@ -19,7 +19,7 @@ export class ProfileComponent {
     name;
 
     phoneno;
-    Address;
+    Address="";
     currentuser; 
     hospitalname;
     Mobile;

@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
-
+import { DataTablesModule } from 'angular-datatables';
 import { TablesRoutes } from './all-data.routing';
 import { AllDoctors } from './all-doctors/all-doctors.component';
 import { AllPatients } from './all-patients/all-patients.component';
@@ -13,8 +11,7 @@ import { DataProvider } from '../../provider/data';
   imports: [
     CommonModule,
     RouterModule.forChild(TablesRoutes),
-    NgxDatatableModule,
-    Ng2SmartTableModule
+    DataTablesModule
   ],
   declarations: [
     AllDoctors,

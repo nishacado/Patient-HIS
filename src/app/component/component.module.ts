@@ -7,7 +7,6 @@ import { JsonpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ComponentsRoutes } from './component.routing';
-import { AllDoctors } from './all-doctors/all-doctors.component';
 import {  MyConnections } from './my-connections/my-connections.component';
 import { PatientRecords } from './my-records/my-records.component';
 import { MyRequests } from './my-requests/my-requests.component';
@@ -28,7 +27,6 @@ import { DataProvider } from '../../provider/data';
     NgbModule
   ],
   declarations: [
-    AllDoctors,
     MyConnections,
     PatientRecords,
     MyRequests,

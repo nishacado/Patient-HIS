@@ -24,6 +24,9 @@ export class DataProvider {
       }
       getCountry(key) {
         return this.angularfire.object('/country/' + key);
-        }
-
+      }
+      
+      getAllrequests(){
+        return this.angularfire.list('/connection-request');
+      }
     }

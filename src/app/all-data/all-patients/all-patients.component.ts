@@ -1,68 +1,57 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { DataProvider } from '../../../provider/data';
-
-
-declare var require: any;
-const data: any = require('./patients.json');
+import * as firebase from 'firebase';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
-  selector: 'app-basic',
   templateUrl: './all-patients.component.html',
   styleUrls: ['./patient.css'] 
 })
-// tslint:disable-next-line:component-class-suffix
-export class AllPatients { 
+export class AllPatients implements OnInit{ 
+  ngOnInit(){
+    this.dtOptions = {
+      // Declare the use of the extension in the dom parameter
+      dom: 'Bfrtip',
+      // Configure the buttons
+      buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+    };
+  }  
 
-  editing = {};
-  rows = [];
- // temp = [...data];
-  
-  loadingIndicator: boolean = true;
-  reorderable: boolean = true;                           
+    curuserdetails: any;
+    allpatients=[];
+    dtOptions={};
+    dttabrefresh=true;
+	constructor(public data:DataProvider,private router: Router){
 
-  columns = [
-      { prop: 'name' },
-      { name: 'Gender' },
-      { name: 'hospital' }
-  ];       
-
-  @ViewChild(AllPatients) table: AllPatients;
-  curuserdetails: any;
-	constructor(public data:DataProvider){
-
-
-		this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
+    let user=firebase.auth().currentUser;
+		if(user){
+			this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
 				this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
 		  });
+		}else{
+		  this.router.navigate(['/authentication/login']);
+		}
 
-	}
-  /*constructor() {
-     
-      this.rows = data;
-      this.temp = [...data];
-      setTimeout(() => { this.loadingIndicator = false; }, 1500);                                   
+    this.data.getUsers().snapshotChanges().subscribe((list) => {
+			var allusers = list.map(c => {
+			  if(c.key != null && c.key != undefined)
+				return { $key: c.key, ...c.payload.val()}
+      });
+      for (var i of allusers){
+        if (i.role=='Patient'){
+          this.allpatients.push(i);
+        }
+      }
+      this.rerender();
+      });
+
   }
   
-  updateFilter(event) {
-  const val = event.target.value.toLowerCase();
-      
-  
-
-  // filter our data
-  const temp = this.temp.filter(function(d) {
-    return d.name.toLowerCase().indexOf(val) !== -1 || !val;
-  });
-      
-  // update the rows
-  this.rows = temp;
-  // Whenever the filter changes, always go back to the first page
-  this.table = data;
+  rerender(){
+    this.dttabrefresh = false;
+    setTimeout(() => {
+      this.dttabrefresh = true;
+  }, 50); 
   }
-  updateValue(event, cell, rowIndex) {    
-  console.log('inline editing rowIndex', rowIndex)
-  this.editing[rowIndex + '-' + cell] = false;
-  this.rows[rowIndex][cell] = event.target.value;
-  this.rows = [...this.rows];
-  console.log('UPDATED!', this.rows[rowIndex][cell]);        
-}*/
+
 }
