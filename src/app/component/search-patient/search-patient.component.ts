@@ -56,7 +56,7 @@ export class SearchPatient{
 	search(){
 		this.filteredusers=[];
 		if(this.patname==""){
-
+			this.filteredusers=[];
 		}else{
 			this.filteredusers=[];
 			for (var i of this.allpatients){
@@ -65,6 +65,7 @@ export class SearchPatient{
 				}
 			}
 			if(this.filteredusers.length==0){
+				this.filteredusers=[];
 				alert('No Patient Found');
 			}
 		}			
@@ -74,19 +75,39 @@ export class SearchPatient{
 		firebase.database().ref('connection-request/').push({
 			sender:this.curuserdetails.key,
 			target:key,
-			reason:this.reason[j]
+			reason:this.reason[j],
+			status:"pending"
 		});
 		this.reason[j]="";
 		alert('request sent');
 	}
 
-	checksent(ky){
+	getstatus(key){
 		for (var i of this.allrequests){
-			if (ky==i.target){
-				return false;
+			if(i.sender==this.curuserdetails.key){
+				if(i.target==key){
+					if(i.status=="pending"){
+						return 1;
+					}
+					else if(i.status=="denied"){
+						return 2;
+					}else{
+						return 3;
+					}
+					
+				}
 			}
 		}
-		return true;
+		return 0;
+	}
+
+	withdraw(key){
+
+		for (var i of this.allrequests){
+			if (i.target==key && i.sender==this.curuserdetails.key){
+				firebase.database().ref('connection-request/').child(i.$key).remove();
+			}
+		}
 	}
 
 }

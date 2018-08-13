@@ -15,32 +15,44 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Herman Beck</td>
-                            <td>Hospital 1</td>
+                        <p *ngIf="userrequests.length==0">No Pending connections requests found</p>
+                        <tr *ngFor="let i of userrequests;">
+                            <td>{{getname(i.sender)}}</td>
+                            <td>{{gethospital(i.sender)}}</td>
                             <td>
-                            for Health research
+                            {{i.reason}}
                             </td>
-                            <td>                <button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i> </button>
-                                <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button></td>
+                            <td><button type="button" class="btn btn-success" (click)="acceptrequest(i.$key)">Allow</button>
+                                <button type="button" class="btn btn-danger" (click)="denyrequest(i.$key)">Deny</button></td>
                         </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Denied Requests </h4>
+            <h6 class="card-subtitle">Requests by doctor which were denied</h6>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>Herman Beck</td>
-                            <td>Hospital 1</td>
-                            <td>
-                            for Health research
-                            </td>
-                            <td>                <button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i> </button>
-                                <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button></td>
+                            <th>Doctor</th>
+                            <th>Hospital</th>
+                            <th>Reason</th>
+                            <th>Action</th>
                         </tr>
-                        <tr>
-                            <td>Herman Beck</td>
-                            <td>Hospital 1</td>
+                    </thead>
+                    <tbody>
+                        <p *ngIf="denieduserrequests.length==0">No Denied connections requests found</p>
+                        <tr *ngFor="let i of denieduserrequests;">
+                            <td>{{getname(i.sender)}}</td>
+                            <td>{{gethospital(i.sender)}}</td>
                             <td>
-                            for Health research
+                            {{i.reason}}
                             </td>
-                            <td>                <button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i> </button>
-                                <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button></td>
+                            <td><button type="button" class="btn btn-warning" (click)="reconsider(i.$key)">Reconsider</button></td>
                         </tr>
                     </tbody>
                 </table>

@@ -55,4 +55,7 @@ export class NavigationComponent implements AfterViewInit {
         this.router.navigate(['/']);
       });
     }
+    toprofile(){
+      this.router.navigate(['/user/profile']);
+    }
 }

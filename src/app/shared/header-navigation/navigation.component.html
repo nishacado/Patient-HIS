@@ -30,17 +30,17 @@
             <!-- ============================================================== -->
             <!-- User profile and search -->
             <!-- ============================================================== -->
-            <ul class="navbar-nav my-lg-0">
+            <ul class="navbar-nav my-lg-0" *ngIf="curuserdetails">
                 <li class="nav-item dropdown" ngbDropdown placement="bottom-right">
-                    <a ngbDropdownToggle class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://identicon-api.herokuapp.com/{{curuserdetails.name}}{{curuserdetails.email}}/64?format=png" alt="user" class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated slideInDown" ngbDropdownMenu>
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box" *ngIf="curuserdetails">
-                                    <div class="u-img"><img src="assets/images/users/1.jpg" alt="user"></div>
+                                    <div class="u-img"><img src="https://identicon-api.herokuapp.com/{{curuserdetails.name}}{{curuserdetails.email}}/64?format=png" alt="user"></div>
                                     <div class="u-text">
                                         <h4>{{curuserdetails.name}}</h4>
-                                        <p class="text-muted">{{curuserdetails.email}}</p><a href="/user/profile" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                        <p class="text-muted">{{curuserdetails.email}}</p><a (click)="toprofile()" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                 </div>
                             </li>
                            <!-- <li role="separator" class="divider"></li>

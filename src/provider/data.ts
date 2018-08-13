@@ -18,14 +18,7 @@ export class DataProvider {
         }else{
           this.router.navigate(['/authentication/login']);
         }
-      }
-      getCountries(){
-        return this.angularfire.list('/country');
-      }
-      getCountry(key) {
-        return this.angularfire.object('/country/' + key);
-      }
-      
+      }     
       getAllrequests(){
         return this.angularfire.list('/connection-request');
       }

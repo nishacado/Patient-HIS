@@ -8,35 +8,20 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Age</th>
+                            <th>E-Mail</th>
+                            <th>Phone No</th>
                             <th>Reason</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Herman Beck</td>
-                            <td>22</td>
-                            <td>
-                             Reason for access
-                            </td>
-                            <td> <button type="button" class="btn btn-success">View</button>&nbsp;<button type="button" class="btn btn-danger">Cancel </button></td>
-                        </tr>
-                        <tr>
-                            <td>Herman Beck</td>
-                            <td>22</td>
-                            <td>
-                             Reason for access
-                            </td>
-                            <td> <button type="button" class="btn btn-success">View</button>&nbsp;<button type="button" class="btn btn-danger">Cancel </button></td>
-                        </tr>
-                        <tr>
-                            <td>Herman Beck</td>
-                            <td>22</td>
-                            <td>
-                             Reason for access
-                            </td>
-                            <td> <button type="button" class="btn btn-success">View</button>&nbsp;<button type="button" class="btn btn-danger">Cancel </button></td>
+                        <p *ngIf="userrequests.length==0">No Connections found</p>
+                        <tr *ngFor="let i of userrequests;">
+                            <td>{{getname(i.target)}}</td>
+                            <td>{{getmail(i.target)}}</td>
+                            <td>{{getphone(i.target)}}</td>
+                            <td>{{i.reason}}</td>
+                            <td><button type="button" class="btn btn-success">View Records</button></td>
                         </tr>
                     </tbody>
                 </table>

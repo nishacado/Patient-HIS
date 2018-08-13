@@ -38,7 +38,11 @@
                             <td>
                                 <input class="form-control" type="text" [(ngModel)]="reason[j]" placeholder="Type Reason">
                             </td>
-                            <td> <button type="button" class="btn btn-success" [disabled]="!reason[j]" (click)="senreq(i.$key,j)">Send </button></td>
+                            <td> <button *ngIf="getstatus(i.$key)==0" type="button" class="btn btn-success" [disabled]="!reason[j]" (click)="senreq(i.$key,j)">Send </button>
+                                <button *ngIf="getstatus(i.$key)==1" type="button" class="btn btn-warning" (click)="withdraw(i.$key)">Withdraw</button>
+                                <button *ngIf="getstatus(i.$key)==2" type="button" class="btn btn-danger">Denied</button>
+                                <button *ngIf="getstatus(i.$key)==3" type="button" class="btn btn-danger">Connected</button>
+                            </td>
                         </tr>
 
                     </tbody>
