@@ -26,6 +26,8 @@ export class ProfileComponent {
     Email;
     location;
     description;
+    allrecords=[];
+    alldoctors=[];
 
     @ViewChild('content') editModal: ElementRef;
     @ViewChild('content1') editModal1: ElementRef;
@@ -35,7 +37,31 @@ export class ProfileComponent {
     if(user){
       this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
         this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
+        			//get records
+			this.data.getRecords().snapshotChanges().subscribe((list) => {
+				var allrecords = list.map(c => {
+					if(c.key != null && c.key != undefined)
+					return { $key: c.key, ...c.payload.val()}
+				});
+				this.allrecords=[];
+				for(var i of allrecords){
+					if(i.name==this.curuserdetails.userId){
+						this.allrecords.push(i);
+					}
+				}
+				});
         });
+        this.data.getUsers().snapshotChanges().subscribe((list) => {
+					var allusers = list.map(c => {
+						if(c.key != null && c.key != undefined)
+						return { $key: c.key, ...c.payload.val()}
+					});
+					for (var i of allusers){
+						if (i.role=='Doctor'){
+							this.alldoctors.push(i);
+						}
+					}
+					});
     }else{
       this.router.navigate(['/authentication/login']);
     }
@@ -138,6 +164,18 @@ export class ProfileComponent {
         } else {
           return  `with: ${reason}`;
         }
+      }
+      getdateandtime(datevalue){
+        var created = new Date(datevalue);
+        return created.getDate()+'/'+(created.getMonth()+1)+'/'+created.getFullYear()+' '+created.getHours()+':'+created.getMinutes()+':'+created.getSeconds();
+      }
+      getdocname(key){
+        for(var i of this.alldoctors){
+          if(i.$key==key){
+            return i.name;
+          }
+        }
+        return "Invalid Name";
       }
     } 
    

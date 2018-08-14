@@ -5,7 +5,7 @@ export const environment = {
     authDomain: "patient-his.firebaseapp.com",
     databaseURL: "https://patient-his.firebaseio.com",
     projectId: "patient-his",
-    storageBucket: "",
+    storageBucket: "patient-his.appspot.com",
     messagingSenderId: "150420362025"
   }
 };

@@ -25,6 +25,7 @@ import { SpinnerComponent } from './shared/spinner.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 
 // for provider
@@ -58,7 +59,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     //AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
 
   providers: [LoginProvider,DataProvider],

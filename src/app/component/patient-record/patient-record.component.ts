@@ -8,9 +8,9 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from '../../../../node_modules/rxjs';
 
 @Component({
-	templateUrl: 'my-records.component.html' 
+	templateUrl: 'patient-record.component.html' 
 })
-export class PatientRecords {
+export class PatientRecord {
 	curuserdetails: any;
 	modelvariable;
 	closeResult: string;
@@ -38,6 +38,7 @@ export class PatientRecords {
 	//end data
 	downloadURL: Observable<string>;
 	uploadProgress: any;
+	totaldepts=[];
 
 constructor(public data:DataProvider,private router: Router,private modalService: NgbModal,private afStorage: AngularFireStorage){
 
@@ -47,18 +48,12 @@ constructor(public data:DataProvider,private router: Router,private modalService
 			this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
 			//get records
 			this.data.getRecords().snapshotChanges().subscribe((list) => {
-				var allrecords = list.map(c => {
+				this.allrecords = list.map(c => {
 					if(c.key != null && c.key != undefined)
 					return { $key: c.key, ...c.payload.val()}
 				});
-				this.allrecords=[];
-				for(var i of allrecords){
-					if(i.name==this.curuserdetails.userId){
-						this.allrecords.push(i);
-					}
-				}
 				});
-			
+
 			//get departments
 			this.data.getDepartments().snapshotChanges().subscribe((deptlist) => {
 				this.deptlist = deptlist.map(c => {
@@ -105,8 +100,8 @@ constructor(public data:DataProvider,private router: Router,private modalService
 					});
 			});
 
-
 		});
+		
 	}else{
 		this.router.navigate(['/authentication/login']);
 	}
@@ -123,7 +118,19 @@ clearall(){
 	this.modelvariable.close();
 }
 
-
+add(){
+	firebase.database().ref('records/').push({
+		name:this.name,
+		created:this.currentdt,
+		dept:this.selecteddepartment,
+		desc:this.cdescription,
+		medi:this.medication,
+		note:this.notes,
+		file:this.fileurl,
+		dockey:this.curuserdetails.userId
+		});
+		this.clearall();	
+}
 
 edit(key){
 	this.key=true;
@@ -204,5 +211,7 @@ getname(key){
 
   return "Invalid record";
 }
+
+
 
 }

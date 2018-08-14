@@ -13,9 +13,10 @@ import { MyRequests } from './my-requests/my-requests.component';
 import { NgbdModalBasic } from './modal/modal.component';
 import { SearchPatient } from './search-patient/search-patient.component';
 import { DataAccess } from './data-access/data-access.component';
-
-
+import { Departments} from './departments/departments.component';
+import { PatientRecord } from './patient-record/patient-record.component';
 import { DataProvider } from '../../provider/data';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { DataProvider } from '../../provider/data';
     FormsModule,
     ReactiveFormsModule,
     JsonpModule,
-    NgbModule
+    NgbModule,
+    AngularFireStorageModule,
   ],
   declarations: [
     MyConnections,
@@ -33,7 +35,8 @@ import { DataProvider } from '../../provider/data';
     NgbdModalBasic,
     SearchPatient,
     DataAccess,
-
+    Departments,
+    PatientRecord
   ],
   providers:[DataProvider]
 })

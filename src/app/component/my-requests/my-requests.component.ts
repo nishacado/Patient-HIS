@@ -51,7 +51,7 @@ export class MyRequests{
 			  if(c.key != null && c.key != undefined)
 				return { $key: c.key, ...c.payload.val()}
      		});
-      	  });
+      });
 	}
 
 	getname(key){

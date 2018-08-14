@@ -22,4 +22,16 @@ export class DataProvider {
       getAllrequests(){
         return this.angularfire.list('/connection-request');
       }
+      getDepartments(){
+        return this.angularfire.list('/departments/'+firebase.auth().currentUser.uid);
+      }
+      getDepartment(key){
+        return this.angularfire.object('/departments/'+firebase.auth().currentUser.uid+'/'+key);
+      }
+      getRecords(){
+        return this.angularfire.list('/records');
+      }
+      getRecord(key){
+        return this.angularfire.object('/records/'+key);
+      }
     }

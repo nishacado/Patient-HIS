@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { SamplePagesRoutes } from './user.routing';
 
 import { ProfileComponent } from './profile/profile.component';
-import { PatientRecord } from './patient-record/patient-record.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DataProvider } from '../../provider/data';
 
@@ -21,7 +20,6 @@ import { DataProvider } from '../../provider/data';
   ],
   declarations: [
     ProfileComponent,
-    PatientRecord
   ],
   providers:[DataProvider]
 })

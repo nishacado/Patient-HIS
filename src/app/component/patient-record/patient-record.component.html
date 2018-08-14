@@ -1,0 +1,116 @@
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Patient Records</h4>
+            <h6 class="card-subtitle">List of all the patient records added by current doctor</h6>
+            <div class="card-body">
+                <ng-template #content let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title" *ngIf="!key">Add New Record</h4>
+            <h4 class="modal-title" *ngIf="key">Edit Record</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="form">
+              <div class="row">
+                <div class="form-group col">
+                    <label class="col"> Patient Name</label>
+                    <div class="col">
+                        <select class="custom-select" [(ngModel)]="name" name="name">
+                            <option value="" selected disabled>Select Patient</option>
+                            <option *ngFor="let i of connectedpatients" value={{i.$key}}>{{i.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col">
+                        <label class="col"> Department</label>
+                        <div class="col">
+                            <select class="custom-select" [(ngModel)]="selecteddepartment" name="selecteddepartment">
+                                <option value="" selected disabled>Select Department</option>
+                                <option *ngFor="let i of deptlist" value={{i.name}}>{{i.name}}</option>
+                            </select>
+                        </div>
+                </div>
+              </div>
+              <div class="row">
+                    <div class="form-group col">
+                        <div class="col">
+                            <label> Case Description</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter Case History" name="cdescription" [(ngModel)]="cdescription"></textarea>    
+                        </div>
+                    </div>
+              </div>
+              <div class="row">
+                    <div class="form-group col">
+                        <div class="col">
+                            <label> Medication</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter Prescription" name="medication" [(ngModel)]="medication"></textarea>    
+                        </div>
+                    </div>
+              </div>
+              <div class="row">
+                    <div class="form-group col">
+                        <div class="col">
+                            <label> Notes</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter Notes" name="notes" [(ngModel)]="notes"></textarea>    
+                        </div>
+                    </div>
+              </div>
+              <div class="row"  *ngIf="!key">
+              <div class="form-group col" style="float:left">
+                  <div class="col">
+                    <label>Attachment</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" (change)="upload($event)"  class="custom-file-input"  accept=".pdf" id="inputGroupFile01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p *ngIf="fileurl !=''" style="color:green">Your File was uploaded !</p>
+                  </div>
+                </div>
+              </div>
+                <button type="submit" *ngIf="!key" class="btn btn-success waves-effect waves-light m-r-10" (click)="add()">Submit</button>
+                <button type="submit" *ngIf="key" class="btn btn-success waves-effect waves-light m-r-10" (click)="update()">Update</button>
+            </form>
+          </div>
+        </ng-template>
+  
+            </div>
+            <button class="btn btn-outline-secondary" (click)="open2(content)" style="position:absolute;right:40%;top:7%;">Add New Record</button>   
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Patient Name</th>
+                            <th>Department</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let i of allrecords">
+                            <td>{{getdateandtime(i.created)}}</td>
+                            <td>{{getname(i.name)}}</td>
+                            <td>{{i.dept}}</td>
+                            <td>
+                                <button type="button" class="btn btn-warning" (click)="edit(i.$key)" ><i class="fa fa-pencil"></i> View / Modify</button>
+                                <a class="btn btn-info" target="_blank" href={{i.file}} style="color:#fff;"><i class="fa fa-cloud-download"></i> Download Attachments</a>
+                                <button type="button" class="btn btn-danger" (click)="delete(i.$key)" ><i class="fa fa-times"></i> Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+  
+        </div>
+    </div>
+  </div>

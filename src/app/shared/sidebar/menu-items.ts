@@ -24,6 +24,9 @@ export const DOCTORROUTE: RouteInfo[] = [
         path: '/user/profile', title: 'Profile', icon: 'mdi mdi-account-edit', class: '', label: '', labelClass: '', extralink: false, submenu: []
     },
     {
+        path: '/component/departments', title: 'Departments', icon: 'mdi mdi-altimeter', class: '', label: '', labelClass: '', extralink: false, submenu: []
+    },
+    {
         path: '', title: 'Doctor', icon: '', class: 'nav-small-cap', label: '', labelClass: '', extralink: true, submenu: []
     },
     {
@@ -33,7 +36,7 @@ export const DOCTORROUTE: RouteInfo[] = [
         path: '/component/data-access', title: 'Data Access', icon: 'mdi mdi-account-key', class: '', label: '', labelClass: '', extralink: false, submenu: []
     },
     {
-        path: '/user/patient-record', title: 'Patient Record', icon: 'mdi mdi-account-alert', class: '', label: '', labelClass: '', extralink: false, submenu: []
+        path: '/component/patient-record', title: 'Patient Record', icon: 'mdi mdi-account-alert', class: '', label: '', labelClass: '', extralink: false, submenu: []
     }
 
 ];

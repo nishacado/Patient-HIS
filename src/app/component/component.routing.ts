@@ -5,7 +5,8 @@ import { MyRequests } from './my-requests/my-requests.component';
 import { NgbdModalBasic } from './modal/modal.component';
 import { SearchPatient } from './search-patient/search-patient.component';
 import { DataAccess } from './data-access/data-access.component';
-
+import { Departments } from './departments/departments.component';
+import { PatientRecord } from './patient-record/patient-record.component'
 
 
 
@@ -59,6 +60,22 @@ export const ComponentsRoutes: Routes = [
       data: {
         title: 'My Data Access',
         urls: [{title: 'Dashboard'}, {title: 'Component'}, {title: 'Data Access'}]
+      }
+    },
+    {
+      path: 'departments',
+      component: Departments,
+      data: {
+        title: 'Departments Handled',
+        urls: [{title: 'Dashboard'}, {title: 'Component'}, {title: 'Departments'}]
+      }
+    },
+    {
+      path: 'patient-record',
+      component: PatientRecord,
+      data: {
+        title: 'Patient Records',
+        urls: [{title: 'Dashboard'}, {title: 'Component'}, {title: 'Patient Records'}]
       }
     }]
   }
