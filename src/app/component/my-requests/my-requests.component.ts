@@ -4,6 +4,7 @@ import 'rxjs/add/operator/debounceTime';
 import { DataProvider } from '../../../provider/data';
 import * as firebase from 'firebase';
 import { Router } from '../../../../node_modules/@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
 	selector: '',
 	templateUrl: 'my-requests.component.html'
@@ -14,7 +15,7 @@ export class MyRequests{
 	userrequests=[];
 	alluser=[];
 	denieduserrequests=[];
-	constructor(public data:DataProvider,private router: Router){
+	constructor(public data:DataProvider,private router: Router,private toastr: ToastrService){
 
 
 		let user=firebase.auth().currentUser;
@@ -80,18 +81,21 @@ export class MyRequests{
 		firebase.database().ref('connection-request/'+key).update({
 			status:"connected"
 		});
+		this.toastr.success('Connection Established', 'Success!');
 	}
 
 	denyrequest(key){
 		firebase.database().ref('connection-request/'+key).update({
 			status:"denied"
 		});
+		this.toastr.error('Request Denied', 'Success!');
 	}
 
 	reconsider(key){
 		firebase.database().ref('connection-request/'+key).update({
 			status:"pending"
 		});		
+		this.toastr.info('Request was reconsidered', 'Success!');
 	}
 
 }

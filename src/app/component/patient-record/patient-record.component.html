@@ -103,7 +103,7 @@
                             <td>{{i.dept}}</td>
                             <td>
                                 <button type="button" class="btn btn-warning" (click)="edit(i.$key)" ><i class="fa fa-pencil"></i> View / Modify</button>
-                                <a class="btn btn-info" target="_blank" href={{i.file}} style="color:#fff;"><i class="fa fa-cloud-download"></i> Download Attachments</a>
+                                <a *ngIf="i.file" class="btn btn-info" target="_blank" href={{i.file}} style="color:#fff;"><i class="fa fa-cloud-download"></i> Download Attachments</a>
                                 <button type="button" class="btn btn-danger" (click)="delete(i.$key)" ><i class="fa fa-times"></i> Delete</button>
                             </td>
                         </tr>

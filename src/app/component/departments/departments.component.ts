@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 import { Router } from '../../../../node_modules/@angular/router';
 import { ElementRef, ViewChild } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class Departments {
 		name;
 		currentkey;
 		@ViewChild('content') editModal: ElementRef;
-	constructor(public data:DataProvider,private router: Router,private modalService: NgbModal){
+	constructor(public data:DataProvider,private router: Router,private modalService: NgbModal,private toastr: ToastrService){
 
 		let user=firebase.auth().currentUser;
 		if(user){
@@ -44,6 +44,7 @@ export class Departments {
     firebase.database().ref('departments/'+firebase.auth().currentUser.uid).push({
       name:this.name
       });
+      this.toastr.success('record Added', 'Success');
       this.name="";
       this.modelvariable.close();
   }
@@ -62,13 +63,15 @@ export class Departments {
     this.key=false;
     firebase.database().ref('departments/'+firebase.auth().currentUser.uid+'/'+this.currentkey).update({
 			name:this.name,
-			});
+      });
+      this.toastr.success('Record Updated', 'Success');
       this.modelvariable.close();
       this.name="";
   }
 
   delete(key){
     firebase.database().ref('departments/'+firebase.auth().currentUser.uid).child(key).remove();
+    this.toastr.error('Record Deleted', 'Success');
   }
 
   open2(content) { 

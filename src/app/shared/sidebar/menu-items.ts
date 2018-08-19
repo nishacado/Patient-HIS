@@ -24,7 +24,7 @@ export const DOCTORROUTE: RouteInfo[] = [
         path: '/user/profile', title: 'Profile', icon: 'mdi mdi-account-edit', class: '', label: '', labelClass: '', extralink: false, submenu: []
     },
     {
-        path: '/component/departments', title: 'Departments', icon: 'mdi mdi-altimeter', class: '', label: '', labelClass: '', extralink: false, submenu: []
+        path: '/component/departments', title: 'Specializations', icon: 'mdi mdi-altimeter', class: '', label: '', labelClass: '', extralink: false, submenu: []
     },
     {
         path: '', title: 'Doctor', icon: '', class: 'nav-small-cap', label: '', labelClass: '', extralink: true, submenu: []

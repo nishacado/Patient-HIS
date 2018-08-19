@@ -2,7 +2,7 @@ import { Component} from '@angular/core';
 import { DataProvider } from '../../../provider/data';
 import * as firebase from 'firebase';
 import { Router } from '../../../../node_modules/@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'ngbd-pagination',
@@ -20,7 +20,7 @@ export class SearchPatient{
 	patname="";
 	allrequests=[];
 
-  constructor(public data:DataProvider,private router: Router) {
+  constructor(public data:DataProvider,private router: Router,private toastr: ToastrService) {
 		let user=firebase.auth().currentUser;
 		if(user){
 			this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
@@ -66,7 +66,7 @@ export class SearchPatient{
 			}
 			if(this.filteredusers.length==0){
 				this.filteredusers=[];
-				alert('No Patient Found');
+				this.toastr.warning('No patient found', 'Not Found');
 			}
 		}			
 	}
@@ -79,7 +79,7 @@ export class SearchPatient{
 			status:"pending"
 		});
 		this.reason[j]="";
-		alert('request sent');
+		this.toastr.error('Request Sent', 'Success');
 	}
 
 	getstatus(key){
@@ -106,6 +106,7 @@ export class SearchPatient{
 		for (var i of this.allrequests){
 			if (i.target==key && i.sender==this.curuserdetails.key){
 				firebase.database().ref('connection-request/').child(i.$key).remove();
+				this.toastr.info('Request removed', 'Success');
 			}
 		}
 	}

@@ -4,6 +4,8 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { DataProvider } from '../../../provider/data';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'ap-navigation',
   templateUrl: './navigation.component.html'
@@ -12,7 +14,7 @@ export class NavigationComponent implements AfterViewInit {
   curuserdetails;
 	name:string;
   	public config: PerfectScrollbarConfigInterface = {};
-    constructor(private modalService: NgbModal,public data:DataProvider,private router:Router){
+    constructor(private modalService: NgbModal,public data:DataProvider,private router:Router,private toastr: ToastrService){
 
       let user=firebase.auth().currentUser;
       if(user){
@@ -52,6 +54,7 @@ export class NavigationComponent implements AfterViewInit {
       //this.toastr.info('Logout was Successful', 'Success');
       firebase.auth().signOut().then((success) => {
         // Clear navigation stacks
+        this.toastr.info('Logged out of the system', 'Success!');
         this.router.navigate(['/']);
       });
     }

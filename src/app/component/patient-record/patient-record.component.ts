@@ -6,6 +6,20 @@ import { ElementRef, ViewChild } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from '../../../../node_modules/rxjs';
+import Orm from 'bigchaindb-orm'
+import { ToastrService } from 'ngx-toastr';
+
+const bdbOrm = new Orm(
+    "https://test.bigchaindb.com/api/v1/",
+    {
+        app_id: "968ba82c",
+        app_key: "ddd3ea7b7a13fa55752346e2e4b85fe3"
+    }
+);
+
+
+bdbOrm.define("myModel", "https://schema.org/v1/myModel");
+const aliceKeypair = new bdbOrm.driver.Ed25519Keypair();
 
 @Component({
 	templateUrl: 'patient-record.component.html' 
@@ -40,10 +54,11 @@ export class PatientRecord {
 	uploadProgress: any;
 	totaldepts=[];
 
-constructor(public data:DataProvider,private router: Router,private modalService: NgbModal,private afStorage: AngularFireStorage){
+constructor(public data:DataProvider,private router: Router,private modalService: NgbModal,private afStorage: AngularFireStorage,private toastr: ToastrService){
 
 	let user=firebase.auth().currentUser;
 	if(user){
+		
 		this.data.getCurrentUser().snapshotChanges().subscribe((datafromdb) => {
 			this.curuserdetails = {key:datafromdb.key,...datafromdb.payload.val()};
 			//get records
@@ -101,7 +116,7 @@ constructor(public data:DataProvider,private router: Router,private modalService
 			});
 
 		});
-		
+		this.getallblocks();
 	}else{
 		this.router.navigate(['/authentication/login']);
 	}
@@ -129,7 +144,36 @@ add(){
 		file:this.fileurl,
 		dockey:this.curuserdetails.userId
 		});
+		this.toastr.success('Record Added', 'Success');
+		this.createblock();
 		this.clearall();	
+}
+
+getallblocks(){
+	bdbOrm.models.myModel.retrieve().then(assets => {
+	 // assets is an array of myModel
+	 console.log(assets.map(asset => asset.id))
+	})
+}
+
+createblock(){
+	bdbOrm.models.myModel
+	.create({
+	 keypair: aliceKeypair,
+	 data: {
+		name:this.name,
+		created:this.currentdt,
+		dept:this.selecteddepartment,
+		desc:this.cdescription,
+		medi:this.medication,
+		note:this.notes,
+		file:this.fileurl,
+		dockey:this.curuserdetails.userId
+	 }
+	})
+	.then(crab => {
+	 console.log(crab.id)
+	})
 }
 
 edit(key){
@@ -156,11 +200,32 @@ update(){
 		medi:this.medication,
 		note:this.notes
 		});
+		this.toastr.success('Record Updated', 'Success');
 		this.clearall();
 }
 
 delete(key){
 	firebase.database().ref('records/').child(key).remove();
+	this.toastr.error('Record deleted', 'Success');
+}
+
+burnblock(){
+	bdbOrm.myModel
+ .create({
+  keypair: aliceKeypair,
+  data: { key: 'dataValue' }
+ })
+ .then(asset => {
+  // lets burn the asset by transferring it to the
+  // burn address. Since we don't know the private key,
+  // it's infeasible to redeem the asset
+  return asset.burn({
+   keypair: aliceKeypair
+  })
+ })
+ .then(burnedAsset => {
+	 console.log("Block burned");
+ })
 }
 
 open2(content) { 

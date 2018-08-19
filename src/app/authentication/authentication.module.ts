@@ -12,13 +12,13 @@ import { SignupComponent } from './signup/signup.component';
 import { AuthenticationRoutes } from './authentication.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginProvider } from '../../provider/login';
-import * as $ from 'jquery'
+import * as $ from 'jquery';
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AuthenticationRoutes),
-    FormsModule
-    
+    FormsModule,
   ],
   declarations: [
     NotFoundComponent,

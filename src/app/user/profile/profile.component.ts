@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import * as firebase from 'firebase';
 import { DataProvider } from '../../../provider/data';
-
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,7 +31,7 @@ export class ProfileComponent {
 
     @ViewChild('content') editModal: ElementRef;
     @ViewChild('content1') editModal1: ElementRef;
-  constructor(private modalService: NgbModal,public data:DataProvider,private router: Router){
+  constructor(private modalService: NgbModal,public data:DataProvider,private router: Router,private toastr: ToastrService){
 
     let user=firebase.auth().currentUser;
     if(user){
@@ -78,7 +78,7 @@ export class ProfileComponent {
           Address:this.Address,
 
           });
-         // this.toastr.success('New Country added', 'Success');
+         this.toastr.success('Profile Updated', 'Success');
          this.modelvariable.close();	  
           this.phoneno="";
           this.Address="";
@@ -94,7 +94,7 @@ export class ProfileComponent {
           description:this.description,
           
           });
-         // this.toastr.success('New Country added', 'Success');
+         this.toastr.success('Hospital Details Updated', 'Success');
          this.modelvariable.close();
          this.hospitalname="";
          this.Mobile="";

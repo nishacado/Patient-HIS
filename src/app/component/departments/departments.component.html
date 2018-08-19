@@ -1,13 +1,13 @@
 <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Departments</h4>
-            <h6 class="card-subtitle">List of departments handled by current logged in doctor</h6>
+            <h4 class="card-title">Specializations</h4>
+            <h6 class="card-subtitle">List of Specializations handled by current logged in doctor</h6>
             <div class="card-body">
                 <ng-template #content let-c="close" let-d="dismiss">
           <div class="modal-header">
-            <h4 class="modal-title" *ngIf="!key">Add New Department</h4>
-            <h4 class="modal-title" *ngIf="key">Edit Department</h4>
+            <h4 class="modal-title" *ngIf="!key">Add New Specialization</h4>
+            <h4 class="modal-title" *ngIf="key">Edit Specializations</h4>
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -17,7 +17,7 @@
                 <div class="form-group m-t-40 row">
                     <label for="example-text-input" class="col-4 col-form-label">Name</label>
                     <div class="col-8">
-                        <input class="form-control" type="text" placeholder="Enter  Department Name" name="name"  [(ngModel)]="name">
+                        <input class="form-control" type="text" placeholder="Enter  Specializations Name" name="name"  [(ngModel)]="name">
                     </div>
                 </div>
                 <button type="submit" *ngIf="!key" class="btn btn-success waves-effect waves-light m-r-10" (click)="add()">Submit</button>
@@ -27,7 +27,7 @@
         </ng-template>
   
             </div>
-            <button class="btn btn-outline-secondary" (click)="open2(content)" style="position:absolute;right:40%;top:7%;">Add New Department</button>   
+            <button class="btn btn-outline-secondary" (click)="open2(content)" style="position:absolute;right:40%;top:7%;">Add New Specialization</button>   
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>

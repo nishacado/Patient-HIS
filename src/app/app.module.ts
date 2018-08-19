@@ -27,11 +27,15 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 
+ 
+import { ToastrModule } from 'ngx-toastr';
 
 // for provider
 import { AngularFireDatabaseModule } from '../../node_modules/angularfire2/database';
 import { LoginProvider } from '../provider/login';
 import { DataProvider } from '../provider/data';
+
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 2,
@@ -58,9 +62,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule addedm
     //AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
   ],
 
   providers: [LoginProvider,DataProvider],

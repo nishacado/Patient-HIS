@@ -3,6 +3,7 @@ import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 import { DataProvider } from '../../../provider/data';
 import * as firebase from 'firebase';
 import { Router } from '../../../../node_modules/@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'ngbd-pagination',
@@ -14,7 +15,7 @@ export class MyConnections{
 	curuserdetails: any;
 	userrequests=[];
 	alluser=[];
-	constructor(public data:DataProvider,private router: Router){
+	constructor(public data:DataProvider,private router: Router,private toastr: ToastrService){
 
 		let user=firebase.auth().currentUser;
 		if(user){
@@ -51,6 +52,7 @@ export class MyConnections{
 		firebase.database().ref('connection-request/'+key).update({
 			status:"denied"
 		});
+		this.toastr.error('Access Denied', 'Information');
 	}
 
 	getname(key){
